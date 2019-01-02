@@ -1,17 +1,17 @@
-package com.humpback.service.wlx.service;
+package ${rootPackage}.service;
 
-import com.humpback.service.wlx.model.UserDeviceHistory;
+import ${modelPackage}.${modelName};
 
-public interface UserDeviceHistoryService {
+public interface ${modelName}Service {
     int deleteByPrimaryKey(Long id);
 
-    int insert(UserDeviceHistory userDeviceHistory);
+    int insert(${modelName} ${littleCamelModelName});
 
-    int insertSelective(UserDeviceHistory userDeviceHistory);
+    int insertSelective(${modelName} ${littleCamelModelName});
 
-    UserDeviceHistory selectByPrimaryKey(Long id);
+    ${modelName} selectByPrimaryKey(Long id);
 
-    int updateByPrimaryKeySelective(UserDeviceHistory userDeviceHistory);
+    int updateByPrimaryKeySelective(${modelName} ${littleCamelModelName});
 
-    int updateByPrimaryKey(UserDeviceHistory userDeviceHistory);
+    int updateByPrimaryKey(${modelName} ${littleCamelModelName});
 }

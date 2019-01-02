@@ -1,38 +1,41 @@
-package com.humpback.service.wlx.service;
+package ${rootPackage}.service;
 
-import com.humpback.service.wlx.model.UserDeviceHistory;
+import ${modelPackage}.${modelName};
+import ${clientPackage}.${clientName};
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
-public interface UserDeviceHistoryService implements UserDeviceHistoryService{
+public class ${modelName}ServiceImpl implements ${modelName}Service{
     @Autowired
-    private  UserDeviceHistoryMapper userDeviceHistoryMapper;
+    private  ${clientName} ${littleCamelClientName};
 
     @Override
     public int deleteByPrimaryKey(Long id){
-        return userDeviceHistoryMapper.deleteByPrimaryKey(id);
+        return ${littleCamelClientName}.deleteByPrimaryKey(id);
     }
 
     @Override
-    public int insert(UserDeviceHistory userDeviceHistory){
-        return userDeviceHistoryMapper.insert(userDeviceHistory);
+    public int insert(${modelName} ${littleCamelModelName}){
+        return ${littleCamelClientName}.insert(${littleCamelModelName});
     }
     @Override
-    public int insertSelective(UserDeviceHistory userDeviceHistory){
-        return userDeviceHistoryMapper.insertSelective(userDeviceHistory);
+    public int insertSelective(${modelName} ${littleCamelModelName}){
+        return ${littleCamelClientName}.insertSelective(${littleCamelModelName});
     }
 
     @Override
     public UserDeviceHistory selectByPrimaryKey(Long id){
-         return userDeviceHistoryMapper.selectByPrimaryKey(id);
+         return ${littleCamelClientName}.selectByPrimaryKey(id);
     }
 
     @Override
-    public int updateByPrimaryKeySelective(UserDeviceHistory userDeviceHistory){
-         return updateByPrimaryKeySelective.selectByPrimaryKey(id);
+    public int updateByPrimaryKeySelective(${modelName} ${littleCamelModelName}){
+         return ${littleCamelClientName}.updateByPrimaryKeySelective(${littleCamelModelName});
     }
 
     @Override
-    public int updateByPrimaryKey(UserDeviceHistory userDeviceHistory){
-        return updateByPrimaryKeySelective.updateByPrimaryKey(userDeviceHistory);
+    public int updateByPrimaryKey(UserDeviceHistory ${littleCamelModelName}){
+        return ${littleCamelClientName}.updateByPrimaryKey(${littleCamelModelName});
     }
 }

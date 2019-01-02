@@ -1,5 +1,5 @@
 /**
- *    Copyright 2006-2017 the original author or authors.
+ *    Copyright 2006-2019 the original author or authors.
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ import static org.mybatis.generator.internal.util.messages.Messages.getString;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,6 +29,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
 
+import com.xy.tools.mbg.ServiceJavaFileGen;
+import org.apache.commons.lang3.StringUtils;
 import org.mybatis.generator.config.Configuration;
 import org.mybatis.generator.config.xml.ConfigurationParser;
 import org.mybatis.generator.exception.InvalidConfigurationException;
@@ -37,7 +40,7 @@ import org.mybatis.generator.logging.LogFactory;
 
 /**
  * This class allows the code generator to be run from the command line.
- * 
+ *
  * @author Jeff Butler
  */
 public class ShellRunner {
@@ -115,7 +118,17 @@ public class ShellRunner {
                     : null;
 
             myBatisGenerator.generate(progressCallback, contexts, fullyqualifiedTables);
-
+            String parentPath = configurationFile.getParent();
+            try {
+                if (StringUtils.isEmpty(parentPath)) {
+                    File file = new File(ShellRunner.class.getProtectionDomain().getCodeSource().getLocation().toURI());
+                    parentPath = file.getParent();
+                }
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
+            ServiceJavaFileGen serviceJavaFileGen = new ServiceJavaFileGen(parentPath);
+            serviceJavaFileGen.writeJavaFile(config, myBatisGenerator);
         } catch (XMLParserException e) {
             writeLine(getString("Progress.3")); //$NON-NLS-1$
             writeLine();
